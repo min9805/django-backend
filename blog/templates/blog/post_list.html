@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <a> content </a>
+    {% for post in posts %}
+        <divclass="post">
+            <a>post..</a>
+            <divclass="date">
+                {{ post.published_date}}
+            </div>  
+            <h1><ahref="">{{ post.title}}</a></h1>
+            <p>
+                {{ post.text|linebreaksbr}}
+            </p>
+            <!--intruder image -->
+            <img src="{{ post.image.url}}" class="rounded intruder-image-list" alt="{{post.title}}">
+        </div>
+    {% endfor%}
+{% endblock%}

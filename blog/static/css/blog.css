@@ -1,0 +1,59 @@
+.css .header {
+  background-color: #3f5fa5;
+  color: white;
+  padding: 20px 30px;
+  border-bottom: 1px solid #3d3d3d;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 40px;
+  font-weight: bolder;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.recent {
+  text-align: center;
+  width: 200px;
+  margin: 10px auto;
+  font-size: 30px;
+  font-weight: lighter;
+  color: #818181;
+  border-bottom: 1px solid #ddd;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.item {
+  overflow: hidden;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.item h3 {
+  font-weight: bolder;
+}
+
+.info {
+  display: inline-block;
+  float: right;
+  font-size: 13px;
+  color: #707070;
+  margin-top: 10px;
+}
+
+.info span {
+  font-weight: bold;
+}
+
+.author {
+  float: right;
+}
+
+.intruder-image-list {
+  object-fit: cover;
+}
