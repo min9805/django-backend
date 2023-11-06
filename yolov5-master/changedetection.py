@@ -42,10 +42,11 @@ class ChangeDetection:
 
         self.result_prev = detected_current[:]
 
-        if change_flag == 1:
+        if change_flag == 1 and detected_current[14] == 1:
             self.send(save_dir, image)
 
     def send(self, save_dir, image):
+        print("send")
         now = datetime.now()
         now.isoformat()
 
@@ -67,16 +68,41 @@ class ChangeDetection:
         dst = cv2.resize(image, dsize=(320, 240), interpolation=cv2.INTER_AREA)
         cv2.imwrite(full_path, dst)
 
-        headers = {"Authorization": "JWT " + self.token, "Accept": "application/json"}
-
-        data = {
-            "title": self.title,
-            "text": self.text,
-            "created_date": now,
-            "published_date": now,
-        }
         file = {"image": open(full_path, "rb")}
-        res = requests.post(
-            self.HOST + "/api_root/Post/", data=data, files=file, headers=headers
-        )
-        print(res)
+
+        predict_url = "http://127.0.0.1:5000/predict"
+
+        files=[
+        ('image',('test2.jpeg',open(full_path, "rb"),'image/jpeg'))
+        ]
+
+        response = requests.request("POST", predict_url, files=files).json()
+
+
+        name = response["answer"]
+        predictions = []
+        for i in range(5):
+            predictions.append(response["predictions"][i])
+        print(predictions)
+        
+        if name != 'background':
+            headers = {"Authorization": "JWT " + self.token, "Accept": "application/json"}
+            data = { "name" : name }
+
+            requests.post(
+                self.HOST + "/api_root/NameCount/", data=data
+            )
+
+        if name == "Aix galericulata":
+
+            data = {
+                "title": name + str(now),
+                "text": str(predictions),
+                "created_date": now,
+                "published_date": now,
+            }
+            res = requests.post(
+                self.HOST + "/api_root/Post/", data=data, files=file, headers=headers
+            )
+
+    

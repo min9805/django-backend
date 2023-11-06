@@ -1,0 +1,60 @@
+<!-- main_page.html -->
+<html>
+  <head>
+    <title>Bird Analytics</title>
+    <link
+      rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+    />
+    <link
+      href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Include the Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1><a href="/">Analytics</a></h1>
+    </div>
+    <canvas id="nameCountChart" width="300" height="100"></canvas>
+    <script>
+      var nameCountsData = {{ name_counts|safe }};
+      var nameData = [];
+      var countData = [];
+
+      for (var i = 0; i < nameCountsData.length; i++) {
+          nameData.push(nameCountsData[i].fields.name);
+          countData.push(nameCountsData[i].fields.count);
+      }
+
+
+      var ctx = document.getElementById('nameCountChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: nameData,
+              datasets: [{
+                  label: 'Name Counts',
+                  data: countData,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+    </script>
+  </body>
+</html>

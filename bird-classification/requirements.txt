@@ -1,0 +1,9 @@
+Flask
+numpy
+pandas
+tensorflow
+tensorflow-datasets
+tensorflow-hub
+keras
+glob2
+pillow

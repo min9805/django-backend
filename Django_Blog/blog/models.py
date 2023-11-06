@@ -17,3 +17,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+class NameCount(models.Model):
+    name = models.CharField(max_length=255)
+    count = models.IntegerField(default=0)
+
+    def publish(self):
+        print("save")
+        self.save()
