@@ -12,6 +12,17 @@
             </p>
             <!--intruder image -->
             <img src="{{ post.image.url}}" class="rounded intruder-image-list" alt="{{post.title}}">
+
+        <form action="{% url 'post_save' post.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="save" value="Save">
+            </form>
+        
+        <form action="{% url 'post_discard' post.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="discard" value="discard">
+            </form>
+        </div>
     {% endfor%}
 {% endblock%}
 

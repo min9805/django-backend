@@ -93,10 +93,12 @@ class ChangeDetection:
                 self.HOST + "/api_root/NameCount/", data=data
             )
 
-        if name == "Aix galericulata":
+        target = ["Spinus tristis", "Protonotaria citrea"]
+
+        if name in target:
 
             data = {
-                "title": name + str(now),
+                "title": name,
                 "text": str(predictions),
                 "created_date": now,
                 "published_date": now,
